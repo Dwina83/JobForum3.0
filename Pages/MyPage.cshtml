@@ -1,0 +1,55 @@
+﻿@page
+@model JobForum3._0.Pages.MyPageModel
+@{
+}
+
+<div class="card box-shadow cardbackground border-3 p-5 m-5" style="width: 50rem">
+    @if (Model.MyUser != null)
+    {
+        <h1>@Model.MyUser.Forename @Model.MyUser.Surname</h1>
+        <br />
+        <br />
+
+        <div class="card cardbackground1">
+            <strong class="card-header">Inbox</strong>
+            @if(Model.Messages != null)
+            {
+                <table class="table">
+                @foreach(var message in Model.Messages)
+                {
+                    @if(message.RecieverName == Model.MyUser.Forename)
+                    {
+                        <tr>
+                            <td>@message.SenderName</td>
+                            <td>@message.SendDate</td>
+                            <td>@message.Content</td>
+                            <td>
+                                <a asp-route-deleteMessage="@message.Id" class="btn btn-primary">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                </table>
+            }
+
+        </div>
+        <br />
+        <br />
+
+        <div class="card cardbackground1">
+            <strong class="card-header">Message</strong>
+            <form method="post">
+                <input type="hidden" asp-for="@Model.Message.UserId" value="@Model.MyUser.Id"/>
+                <input type="hidden" asp-for="@Model.Message.SenderName" value="@Model.MyUser.Forename"/>
+                <label asp-for="@Model.Message.RecieverName" class="control-label">To</label>
+                <input asp-for="@Model.Message.RecieverName" class="form-control" />
+                <label asp-for="@Model.Message.Content" class="control-label">Message</label>
+                <textarea asp-for="@Model.Message.Content" class="form-control" cols="40" rows="5"></textarea>
+                <br />
+                <button onclick="sendMessage()">Send</button>
+                <div id="textContent" style="display:none"></div>
+            </form>
+        </div>
+    }
+
+</div>

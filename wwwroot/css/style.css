@@ -1,0 +1,67 @@
+﻿.navbarcolor {
+    background-color: black;
+}
+
+.navbar-custom
+{
+    height: 100px;
+}
+
+.logo {
+    align-self: start;
+    left:0;
+    padding-left:25px;
+}
+
+.picture-header {
+    height: 65px;
+    width: 65px;
+    margin: 0.5em;
+}
+
+.picture-icon {
+    height: 20px;
+    width: 20px;
+}
+
+.picture-custom{
+    height: 150px;
+    width: 100%;
+    margin: 1em;
+}
+
+.noleft{
+    margin: 1em;
+}
+
+.backgroundbody {
+    background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.footermain {
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    position: absolute;
+    bottom: 0;
+}
+
+.cardbackground {
+    background-image: url("../img/abstract.jpg");
+    display: flex;
+    background-repeat: no-repeat;
+}
+
+.cardbackground1 {
+    background-image: url("../img/abstract-empty.jpg");
+    display:flex;
+    background-repeat: no-repeat;
+}
+
+.example::-webkit-scrollbar{
+    display:none;
+}

@@ -1,0 +1,115 @@
+﻿
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="row border rounded-3 bg-warning top-0 mw-100 m-0">
+    <div class="col-12 col-lg-6 col-md-6 align-content-center">
+        <img src="~/img/sweden-flag.jpg" class="picture-custom align-content-center rounded-circle" />
+    </div>
+    <div class="col justify-content-evenly align-content-center noleft fs-1">
+        <h1>Seeking jobs in Sweden? You came to the right forum!</h1>
+    </div>
+</div>
+
+<br />
+
+<div class="text-start">
+    @if (Model.MyUser != null)
+    {
+        <h1 class="display-5">Welcome @Model.MyUser.Forename!</h1>
+    }
+    else
+    {
+        <div class="alert alert-danger">You need to log in to participate in the forum!</div>
+    }
+
+</div>
+
+<br />
+
+<div class="px-4 m-3">
+    <div class="row gx-5">
+        @if(Model.TopicList != null)
+        {
+            foreach(var topic in Model.TopicList)
+            {
+                <div class="col-9 card m-2 cardbackground1" style="width:20rem">
+                <div class="card-body">
+                    <h5 class="card-title bg-gradient">@topic.Title</h5>
+                    <p class="card-body">Author: @topic.Author</p>
+                    <p class="card-text">@topic.Text</p>
+                        <div class="card-footer">
+
+                            @if (Model.TopicResponseList != null)
+                            {
+                                <p><img src="~/img/chat.png" class="picture-icon" /> @Model.TopicResponseList.Where(tr => tr.TopicId == topic.Id).ToList().Count</p>
+                           
+                            }
+                            <p>@topic.LastUpdated</p>
+                        </div>
+                </div>
+            </div>
+            }
+        }
+       
+
+        <div class="col">
+            <br />
+            <br />
+            <h5 class="card-header">Article</h5>
+            @if (Model.ArticleList != null)
+            {
+                foreach (var article in Model.ArticleList)
+                {
+                    <strong class="card-title">@article.Header</strong>
+                    <p class="card-subtitle">@article.Description</p>
+                    <p class="card-title">@article.Author</p>
+                    <iframe class="card-img-bottom" src="~/fileupload/@article.FileUpload"></iframe>
+                    <p class="card-footer">@article.DatePosted</p>
+
+                }
+                <br />
+                <br />
+            }
+
+
+            </div>
+        </div>
+    </div>
+
+<footer class="border-top footer text-muted bg-black footermain">
+    <div class="container">
+        @using Microsoft.AspNetCore.Http.Features
+        @{
+        var consentFeatureFlag = HttpContext.Features.Get<ITrackingConsentFeature>
+            ();
+            var showBannerFlag = !consentFeatureFlag?.CanTrack ?? false;
+            var cookieStr = consentFeatureFlag?.CreateConsentCookie();
+        }
+        @if(showBannerFlag == true)
+        {
+            <div id="cookieConsentdiv">
+                <h3 class="display-6">Vår Cookie Policy</h3>
+                <p>PLEASE ACCEPT OUR <a asp-page="/CookiePolicy">COOKIE POLICY</a>.   </p>
+                <button type="button" data-cookie-string="@cookieStr">
+                    <span aria-hidden="true">Accept</span>
+                </button>
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $("#cookieConsentdiv button[data-cookie-string]").bind("click", function () {
+                        document.cookie = $("#cookieConsentdiv button").attr("data-cookie-string");
+                        $("#cookieConsentdiv").hide();
+                    });
+                });
+            </script>
+        }
+    </div>
+</footer>
+
+
+

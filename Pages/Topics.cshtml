@@ -1,0 +1,102 @@
+﻿@page
+@model JobForum3._0.Pages.TopicsModel
+@{
+    
+}
+<br />
+<br />
+
+<div class="row gx-5">
+    @if(Model.TopicList != null)
+    {
+
+        @foreach(var topic in Model.TopicList)
+        {
+            <div class="row card box-shadow cardbackground border-3 p-5 m-5" style="width: 30rem">
+                <h3 class="card-header">@topic.Title</h3>
+                <br />
+                <p class="card-header-pills">Topic Id: @topic.Id</p>
+                <p class="card-header-pills">Author: @topic.Author</p>
+                <p class="card-header-pills">Posted on: @topic.LastUpdated</p>
+                <p class="card-body">@topic.Text</p>
+
+                <br />
+                <h5 class="card-header">Answer</h5>
+                <br />
+
+                
+                @if (Model.TopicResponseList != null)
+                {
+                    <p><img src="~/img/chat.png" class="picture-icon" /> @Model.TopicResponseList.Where(tr => tr.TopicId == topic.Id).ToList().Count</p>
+
+                    @foreach (var response in Model.TopicResponseList)
+                    {
+                        @if (response.TopicId == topic.Id)
+                        {
+
+
+                            <div class="card-body border-dark">
+
+
+                                <p class="card-text">@response.Response</p>
+                                <p class="card-footer">@response.Name **** Posted on: @response.ResponseDate</p>
+
+
+                                @if (Model.MyUser != null)
+                                {
+                                    <form method="post">
+                                        <input type="hidden" name="ResponseId" value="@response.Id"/>
+                                        <input type="hidden" name="ReporterUserId" value="@Model.MyUser.Id" />
+                                        <input type="hidden" name="ReporterName" value="@Model.MyUser.Forename"/>
+                                        <button onclick="displayText()">Report</button>
+                                        <div id="textField" style="display:none"></div>
+                                        <br />
+                                    </form>
+                                }
+
+                            </div>
+
+
+
+                        }
+                    }
+                    
+
+                }
+                else
+                {
+                    <p>No response yet</p>
+                }
+                
+           
+
+        
+                @if (Model.MyUser != null )
+                {
+        
+                        <form method="post">
+                            <input type="hidden" name="TopicId" value="@topic.Id"/>
+                            <label asp-for="TopicResponse.Name" class="control-label"></label>
+                            <input asp-for="TopicResponse.Name" class="form-control"/>
+                            <label asp-for="TopicResponse.Response" class="control-label"></label>
+                            <textarea asp-for="TopicResponse.Response" class="form-control" cols="40" rows="5"></textarea>
+                            <br />
+                            <input type="submit" class="btn btn-secondary bg-gradient" value="Save" />
+                        </form>
+                }
+                else
+                {
+                    <p class="alert alert-danger">Oops, you need to log in to post a response!</p>
+                }
+
+            
+   
+       
+
+            </div>
+
+        }
+    }
+</div>  
+
+    

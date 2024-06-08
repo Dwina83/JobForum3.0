@@ -1,0 +1,30 @@
+﻿@page "{id:int?}"
+@model JobForum3._0.Pages.ArticleModel
+@{
+}
+
+<div class="card">
+    @if (Model.ArticleList != null)
+    {
+   
+         foreach(var article in Model.ArticleList)
+        {
+            <div class="card-body cardbackground">
+            <strong class="card-header">@article.Header</strong>
+            <br />
+            <br />
+            <p class="card-header-tabs">@article.Description</p>
+            <br />
+            <p class="card-header-tabs">Author: @article.Author</p>
+            <br />
+            
+            <iframe class="card-img-bottom" src="~/fileupload/@article.FileUpload" style="height: 800px;"></iframe>
+            <p class="card-footer">@article.DatePosted</p>
+
+            </div>
+        }
+    }
+    <br />
+    <br />
+
+</div>

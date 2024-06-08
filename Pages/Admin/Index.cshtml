@@ -1,0 +1,43 @@
+﻿@page
+@model JobForum3._0.Pages.Admin.IndexModel
+@{
+}
+
+<table class="table">
+    <tr>
+        <th>Username</th>
+
+        @foreach (var role in Model.Roles)
+        {
+            <th>@role.Name</th>
+        }
+    </tr>
+
+    @foreach (var user in Model.Users)
+    {
+        <tr>
+            <td>@user.UserName</td>
+
+            @foreach (var role in Model.Roles)
+            {
+                if (await Model._userManager.IsInRoleAsync(user, role.Name))
+                {
+                    <td><a href="?RemoveUserId=@user.Id&RoleName=@role.Name">Yes</a></td>
+                }
+                else
+                {
+                    <td><a href="?AddUserId=@user.Id&RoleName=@role.Name">No</a></td>
+                }
+            }
+        </tr>
+    }
+
+</table>
+
+<br />
+
+<form method="post">
+    <label for="RoleName">New role</label>
+    <input name="RoleName" id="RoleName" />
+    <input type="submit" value="Create new role" />
+</form>

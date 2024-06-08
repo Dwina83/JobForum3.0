@@ -1,0 +1,40 @@
+﻿@page
+@model JobForum3._0.Pages.JobsModel
+@{
+}
+
+<br />
+<div class="row">
+    <div class=" card">
+
+        @if (Model.JobAd != null)
+        {
+            @if (Model.JobAd.hits != null)
+            {
+                <h4>Total job ads: @Model.JobAd.hits.Length</h4>
+
+                <br />
+                <br />
+                @foreach (var hit in Model.JobAd.hits)
+                {
+                    <div class="card-body">
+                        <h5 class="card-header">@hit.headline</h5>
+                        <p class="card-header-pills">@hit.occupation_field.label</p>
+                        <p class="card-header-pills">@hit.employer.name</p>
+                        <p class="card-header-pills">@hit.publication_date</p>
+                        <p class="card-text">@hit.brief</p>
+                        <p class="card-footer"><a asp-route="@hit.source_links[0].url">@hit.source_links[0].url</a></p>
+
+                    </div>
+                }
+
+            }
+            else
+            {
+                <p>No jobs available</p>
+            }
+        }
+
+    </div>
+
+</div>

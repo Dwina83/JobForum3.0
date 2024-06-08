@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - JobForum3._0</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/JobForum3._0.styles.css" asp-append-version="true" />
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body class="backgroundbody">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-black border-bottom box-shadow navbar-custom">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index"><img src="~/img/logo.png" class="picture-header" /></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 justify-content-end">
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle bg-black border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Topic</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Topics">All Topics</a></li>
+                                <li><a class="dropdown-item" href="/Admin/TopicAdmin/Create">Create Topic</a></li>
+                            </ul>
+                        </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/Jobs">Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-page="/Article">Article</a>
+                        </li>
+                        <div class="dropdown">
+                            <a class="btn btn-secondary dropdown-toggle bg-black border-0" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/Admin/Index">Admin List</a></li>
+                                <li><a class="dropdown-item" href="/Admin/ArticleAdmin/Index">Article</a></li>
+                                <li><a class="dropdown-item" href="/Admin/TopicAdmin/Index">Topic</a></li>
+                                <li><a class="dropdown-item" href="/Admin/TopicResponseAdmin/Index">Response</a></li>
+                                <li><a class="dropdown-item" href="/Admin/ReportResponseAdmin/Index">ReportList</a></li>
+                            </ul>
+                        </div>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container example" >
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted bg-black footermain" >
+        <div class="container">
+            &copy; 2024 - JobForum2._0 - <a asp-area="" asp-page="/Privacy">Cookies</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
